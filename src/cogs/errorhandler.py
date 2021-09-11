@@ -160,7 +160,10 @@ class CommandErrorHandler(commands.Cog):
             return await ctx.error("There was an error while processing this action.")
         
         # All other Errors not returned come here... And we can just print the default TraceBack + log
-        await ctx.error(f"An exception occurred: {type(error)}\n{error}\n```{''.join(traceback.format_tb(error.__traceback__))}```")
+        if len(''.join(traceback.format_tb(error.__traceback__))) > 1850:
+            await ctx.error(f"An exception occurred: {type(error)}\n{error}\n```{''.join(traceback.format_tb(error.__traceback__))[:1850]}... \n\n(Character limit reached!)```")
+        else:
+            await ctx.error(f"An exception occurred: {type(error)}\n{error}\n```{''.join(traceback.format_tb(error.__traceback__))}```")
         await self.webhook.send(embed=emb)
         print(f'Ignoring exception in command {ctx.command}:', file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
