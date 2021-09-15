@@ -493,7 +493,7 @@ class GlobalCog(commands.Cog, name="Baba Is You"):
     async def rule(self, ctx: Context, *, objects: str = ""):
         '''Renders the text tiles provided. 
         
-        If not found, the bot tries to auto-generate them! (See the `make` command for more.)
+        If not found, the bot tries to auto-generate them!
 
         **Flags**
         * `--palette=<...>` (`-P=<...>`): Recolors the output gif. See `search type:palettes` command for palettes.
